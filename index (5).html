@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicolas Alvarez — Industrial Engineer & Business Analytics</title>
+  <meta name="description" content="Industrial Engineer and Columbia University MSc Business Analytics. Experience across consulting, aviation, and marketing in the US." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --navy-deep:  #0A1F3E;
+      --navy:       #0D2547;
+      --navy-mid:   #1B3560;
+      --columbia:   #4A7FA5;
+      --columbia-lt:#C4D8E2;
+      --columbia-bg:#E8EFF4;
+
+      --white:      #FFFFFF;
+      --off:        #FAFAFA;
+      --grey-bg:    #F5F5F5;
+      --border:     #E5E5E5;
+      --border-dk:  #D0D0D0;
+      --ink:        #111111;
+      --ink-soft:   #2A2A2A;
+      --muted:      #6B7280;
+      --muted-lt:   #9CA3AF;
+
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+
+      --max-w:  1320px;
+      --gutter: 40px;
+      --nav-h:  72px;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+    ::selection { background: var(--navy); color: var(--white); }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+
+    /* ─── Main Navigation ────────────────────────────────────────── */
+    nav.mainnav {
+      position: fixed;
+      top: 0;
+      left: 0; right: 0;
+      height: var(--nav-h);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 80;
+      transition: box-shadow 0.3s;
+    }
+    nav.mainnav.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-text {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .brand-text span {
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      justify-self: center;
+    }
+    .nav-list a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+    .nav-list a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 2px;
+      background: var(--navy);
+      transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  left  0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-list a:hover::after,
+    .nav-list a.active::after {
+      width: 100%; left: 0;
+    }
+    .nav-list a:hover, .nav-list a.active { color: var(--navy); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover {
+      background: var(--columbia);
+      transform: translateY(-1px);
+    }
+    .nav-cta svg { transition: transform 0.2s; }
+    .nav-cta:hover svg { transform: translate(2px, -2px); }
+
+    /* Mobile toggle */
+    .nav-toggle {
+      display: none;
+      width: 32px; height: 32px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px; height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    @media (max-width: 920px) {
+      .nav-list, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { grid-template-columns: auto 1fr; }
+      .nav-toggle { justify-self: end; }
+      .nav-list.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: var(--white);
+        padding: 24px var(--gutter) 32px;
+        gap: 4px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      }
+      .nav-list.open a {
+        font-size: 16px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 720px;
+      max-height: 1080px;
+      padding-top: var(--nav-h);
+      background: var(--navy-deep);
+      overflow: hidden;
+      color: var(--white);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(74,127,165,0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(27,53,96,0.6) 0%, transparent 60%),
+        linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+    }
+
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,216,226,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,216,226,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+    }
+
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-dot {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--columbia-lt);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: float 14s ease-in-out infinite;
+    }
+    .hero-dot::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid var(--columbia);
+      opacity: 0.4;
+    }
+    .hero-dot:nth-child(1) { top: 22%; left: 12%; animation-delay: 0s; }
+    .hero-dot:nth-child(2) { top: 70%; left: 18%; animation-delay: 2s; }
+    .hero-dot:nth-child(3) { top: 40%; left: 88%; animation-delay: 4s; }
+    .hero-dot:nth-child(4) { top: 78%; left: 78%; animation-delay: 6s; }
+    .hero-dot:nth-child(5) { top: 15%; left: 65%; animation-delay: 8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50%      { transform: translate(20px, -25px); }
+    }
+
+    .hero-accent {
+      position: absolute;
+      top: 25%;
+      left: -5%;
+      width: 110%;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(196,216,226,0.15) 30%,
+        rgba(196,216,226,0.3) 50%,
+        rgba(196,216,226,0.15) 70%,
+        transparent 100%);
+      transform: rotate(-3deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 80px;
+    }
+
+    .hero-headline {
+      font-size: clamp(56px, 9vw, 132px);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 36px;
+    }
+    .hero-headline .line {
+      display: block;
+    }
+    .hero-headline .accent {
+      color: var(--columbia-lt);
+      font-weight: 500;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 1.6vw, 19px);
+      font-weight: 300;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 26px;
+      background: var(--white);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover {
+      background: var(--columbia-lt);
+      transform: translateY(-2px);
+    }
+    .btn-primary svg { transition: transform 0.25s; }
+    .btn-primary:hover svg { transform: translate(3px, -3px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 26px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 14px;
+      font-weight: 400;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* Hero scroll indicator — line only, no text */
+    .hero-footer {
+      position: absolute;
+      bottom: 32px; left: 0; right: 0;
+      z-index: 2;
+      padding: 0 var(--gutter);
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .scroll-line {
+      width: 1px; height: 56px;
+      background: rgba(255,255,255,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 50%;
+      background: var(--columbia-lt);
+      animation: scrollLine 2.2s infinite ease-in-out;
+    }
+    @keyframes scrollLine {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(200%); }
+    }
+
+    @media (max-width: 760px) {
+      .hero-cta-row { width: 100%; }
+      .btn-primary, .btn-ghost { padding: 14px 22px; font-size: 13px; }
+      #hero { min-height: 620px; }
+    }
+
+
+    /* ─── Section Framework ──────────────────────────────────────── */
+    .section {
+      padding: 120px 0;
+      position: relative;
+    }
+    .section-alt { background: var(--grey-bg); }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+    .section-title {
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--navy);
+    }
+    .section-title strong { font-weight: 600; color: var(--ink); }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--navy);
+      transition: gap 0.25s, color 0.2s;
+    }
+    .section-link:hover { gap: 18px; color: var(--columbia); }
+
+    @media (max-width: 760px) {
+      .section { padding: 80px 0; }
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 48px;
+        align-items: start;
+      }
+    }
+
+
+    /* ─── About ───────────────────────────────────────────────── */
+    #about {
+      padding-top: 100px;
+      padding-bottom: 100px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-photo {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: var(--grey-bg);
+      overflow: hidden;
+    }
+    .about-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .about-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--border-dk);
+    }
+    .about-photo-placeholder span {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .about-photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 16px 20px;
+      background: linear-gradient(180deg, transparent 0%, rgba(11,37,69,0.85) 100%);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .about-statement {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
+    .about-statement strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    @media (max-width: 920px) {
+      .about-grid { grid-template-columns: 1fr; gap: 56px; }
+      .about-photo { max-width: 400px; }
+    }
+
+
+    /* ─── Work Experience — Story Cards ──────────────────────── */
+    #work { background: var(--white); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .work-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-card:hover { transform: translateY(-4px); }
+
+    .work-image {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: var(--navy);
+      overflow: hidden;
+    }
+    /* Default gradient variations per card (in case you don't add photos) */
+    .work-card:nth-child(1) .work-image {
+      background:
+        radial-gradient(ellipse at 70% 30%, rgba(196,216,226,0.18) 0%, transparent 60%),
+        linear-gradient(135deg, #0A1F3E 0%, #1B3560 100%);
+    }
+    .work-card:nth-child(2) .work-image {
+      background:
+        radial-gradient(ellipse at 30% 70%, rgba(74,127,165,0.3) 0%, transparent 60%),
+        linear-gradient(135deg, #0D2547 0%, #2A4A7A 100%);
+    }
+    .work-card:nth-child(3) .work-image {
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(196,216,226,0.12) 0%, transparent 55%),
+        linear-gradient(135deg, #1B3560 0%, #0A1F3E 100%);
+    }
+    .work-card:nth-child(4) .work-image {
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(74,127,165,0.2) 0%, transparent 60%),
+        linear-gradient(135deg, #0D2547 0%, #1B3560 100%);
+    }
+    .work-card:nth-child(5) .work-image {
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(196,216,226,0.15) 0%, transparent 55%),
+        linear-gradient(135deg, #0A1F3E 0%, #2A4A7A 100%);
+    }
+
+    /* Decorative grid overlay (only shown when no photo present) */
+    .work-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,216,226,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,216,226,0.05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      z-index: 1;
+    }
+    /* Hide the grid pattern when a photo is present */
+    .work-image:has(.work-image-photo)::before {
+      display: none;
+    }
+
+    /* Monogram letter (default placeholder) */
+    .work-image-letter {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(72px, 7vw, 110px);
+      font-weight: 200;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      z-index: 2;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-card:hover .work-image-letter {
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    /* ── For real photos: drop in <img class="work-image-photo" src="..." /> ── */
+    .work-image-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-card:hover .work-image-photo {
+      transform: scale(1.05);
+    }
+    /* Subtle dark gradient overlay for legibility when a photo is used */
+    .work-image:has(.work-image-photo)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,31,62,0.15) 0%, rgba(10,31,62,0.55) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* For centered logos (transparent PNG on dark bg) */
+    .work-image-logo {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 50%;
+      max-height: 50%;
+      z-index: 2;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    /* Image overlay tag */
+    .work-image-tag {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .work-card-body {
+      padding: 28px 24px 32px;
+      border: 1px solid var(--border);
+      border-top: none;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .work-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .work-card-meta-dot {
+      width: 3px; height: 3px;
+      background: var(--columbia);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .work-card-title {
+      font-size: clamp(20px, 1.5vw, 23px);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+    }
+    .work-card-company {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--columbia);
+    }
+    .work-card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      flex-grow: 1;
+    }
+
+    @media (max-width: 1100px) {
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .work-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+
+
+    /* ─── Education ──────────────────────────────────────────── */
+    #education { background: var(--grey-bg); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .edu-card {
+      background: var(--white);
+      padding: 36px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid transparent;
+    }
+    .edu-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border);
+      box-shadow: 0 12px 32px rgba(11,37,69,0.06);
+    }
+
+    .edu-card-mark {
+      width: 48px; height: 48px;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .edu-card-mark img {
+      max-width: 70%; max-height: 70%;
+      filter: brightness(0) invert(1);
+    }
+
+    .edu-card-years {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--columbia);
+    }
+    .edu-card-degree {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--navy);
+    }
+    .edu-card-institution {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+    .edu-card-location {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .edu-card-courses {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--muted);
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 6px;
+    }
+    .edu-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-top: auto;
+      padding-top: 16px;
+      transition: gap 0.2s, color 0.2s;
+    }
+    .edu-card-link:hover { gap: 12px; color: var(--columbia); }
+
+    @media (max-width: 920px) {
+      .edu-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ─── Capabilities ───────────────────────────────────────── */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .skill-block {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 40px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-block:hover {
+      border-color: var(--navy);
+      transform: translateY(-4px);
+    }
+
+    .skill-block-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .skill-block-title {
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
+
+    .skill-block-icon {
+      width: 56px; height: 56px;
+      background: var(--columbia-bg);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .skill-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .skill-list li:last-child { border-bottom: none; }
+    .skill-list li .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      min-width: 24px;
+    }
+
+    @media (max-width: 920px) {
+      .skills-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+
+    /* ─── Research / Thesis ──────────────────────────────────── */
+    #research {
+      background: var(--navy-deep);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    #research::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(74,127,165,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(27,53,96,0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    #research .section-title { color: var(--white); }
+    #research .section-title strong { color: var(--columbia-lt); }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 64px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .research-quote {
+      font-size: clamp(22px, 2.6vw, 30px);
+      font-weight: 300;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 36px;
+      max-width: 720px;
+    }
+    .research-quote strong {
+      font-weight: 500;
+      color: var(--columbia-lt);
+    }
+
+    .research-attribution {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+    }
+
+    .research-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 28px;
+      background: var(--columbia-lt);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .research-cta:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+    .research-cta svg { transition: transform 0.25s; }
+    .research-cta:hover svg { transform: translate(3px, -3px); }
+
+    .research-facts {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .research-fact {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      align-items: baseline;
+    }
+    .research-fact:last-child { border-bottom: none; }
+    .research-fact-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .research-fact-value {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 920px) {
+      .research-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+
+    /* ─── Contact ────────────────────────────────────────────── */
+    #contact {
+      background: var(--white);
+      padding: 120px 0;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .contact-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 24px 36px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-cta:hover {
+      background: var(--columbia);
+      transform: translateY(-2px);
+    }
+    .contact-cta svg { transition: transform 0.25s; }
+    .contact-cta:hover svg { transform: translate(3px, -3px); }
+
+    .contact-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s, gap 0.2s;
+    }
+    .contact-secondary:hover {
+      color: var(--navy);
+      gap: 16px;
+    }
+    .contact-secondary svg { transition: transform 0.2s; }
+    .contact-secondary:hover svg { transform: translate(2px, -2px); }
+
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.7);
+      padding: 80px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .footer-brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand-mark .mark-square {
+      width: 36px; height: 36px;
+      background: var(--white);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .footer-brand-mark .mark-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .footer-brand-mark .mark-text span {
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-brand-tag {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      max-width: 280px;
+      line-height: 1.55;
+    }
+
+    .footer-col-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--columbia-lt);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-col a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--columbia-lt); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: var(--white); }
+
+    @media (max-width: 920px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+    @media (max-width: 540px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ─── Reveal on scroll ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 760px) {
+      :root { --gutter: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Main Navigation ──────────────────────────────────────── -->
+  <nav class="mainnav" id="mainnav">
+    <div class="nav-inner">
+
+      <a href="#hero" class="brand">
+        <div class="brand-mark">NA</div>
+        <div class="brand-text">Nicolas <span>Alvarez</span></div>
+      </a>
+
+      <ul class="nav-list" id="nav-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Capabilities</a></li>
+        <li><a href="#research">Research</a></li>
+      </ul>
+
+      <a href="#contact" class="nav-cta">
+        Get in touch
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+
+      <div class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ─── Hero ─────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-dots">
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+      <span class="hero-dot"></span>
+    </div>
+
+    <div class="wrap hero-content">
+
+      <h1 class="hero-headline">
+        <span class="line">Engineering,</span>
+        <span class="line">Business,</span>
+        <span class="line accent">Perseverance</span>
+      </h1>
+
+      <p class="hero-sub">
+        Industrial Engineer and Columbia University MSc Business Analytics. With
+        experience across multiple industries creating value across the globe.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="#work" class="btn-primary">
+          Explore my work
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+        <a href="resume/resume.pdf" download class="btn-ghost">
+          Download résumé
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-footer">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ─── About ────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+
+        <!-- REPLACE src with your headshot at assets/photos/profile.jpg -->
+        <div class="about-photo">
+          <img src="assets/photos/profile.jpg"
+               alt="Nicolas Alvarez"
+               onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\'about-photo-placeholder\'><svg width=\'72\' height=\'72\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M4 20c0-4 3.6-7 8-7s8 3 8 7\'/></svg><span>assets/photos/profile.jpg</span></div><div class=\'about-photo-caption\'><span>Nicolas Alvarez</span><span>New York</span></div>'" />
+          <div class="about-photo-caption">
+            <span>Nicolas Alvarez</span>
+            <span>New York</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="about-statement">
+            Industrial Engineer with a <strong>MSc in Business Analytics</strong>,
+            with experience in consulting, the aviation industry, and Marketing in the US.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── Work Experience ─────────────────────────────────────── -->
+  <section id="work" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <h2 class="section-title">Work Experience</h2>
+        <a href="resume/resume.pdf" download class="section-link">
+          View full résumé
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <div class="work-grid">
+
+        <!-- 
+          HOW TO ADD A PHOTO TO ANY EXPERIENCE CARD:
+          Replace the line:    <span class="work-image-letter">XX</span>
+          With:                <img class="work-image-photo" src="assets/photos/jetfuel.jpg" alt="..." />
+          
+          The card auto-handles the photo: hides the grid pattern, adds a subtle dark gradient
+          for legibility, and scales the image on hover. Best image size: 800x500px (16:10).
+          
+          To use a centered logo on the navy background instead:
+          Replace with:        <img class="work-image-logo" src="assets/logos/jetfuel.png" alt="..." />
+        -->
+
+        <!-- JetFuel Studio — current internship -->
+        <article class="work-card">
+          <div class="work-image">
+            <span class="work-image-tag">New Business Development</span>
+            <span class="work-image-letter">JF</span>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>Jun 2026 to Sep 2026</span>
+              <span class="work-card-meta-dot"></span>
+              <span>New York, NY</span>
+            </div>
+            <h3 class="work-card-title">Business Development Intern</h3>
+            <div class="work-card-company">JetFuel Studio</div>
+            <p class="work-card-desc">
+              Working with the New Business Development team to build AI tools that
+              assess case studies and accelerate research, saving hours of manual work,
+              while contributing to crafting pitches for new clients.
+            </p>
+          </div>
+        </article>
+
+        <!-- Columbia -->
+        <article class="work-card">
+          <div class="work-image">
+            <span class="work-image-tag">Graduate Teaching Assistant</span>
+            <span class="work-image-letter">CU</span>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>Jan 2026 to Present</span>
+              <span class="work-card-meta-dot"></span>
+              <span>New York, NY</span>
+            </div>
+            <h3 class="work-card-title">Course Assistant, Simulation Modeling &amp; Analysis</h3>
+            <div class="work-card-company">Columbia University</div>
+            <p class="work-card-desc">
+              Support graduate students through weekly office hours and exam proctoring,
+              leveraging AI-assisted tools for consistent grading and timely feedback on
+              simulation modeling problems.
+            </p>
+          </div>
+        </article>
+
+        <!-- Avianca -->
+        <article class="work-card">
+          <div class="work-image">
+            <span class="work-image-tag">Aviation</span>
+            <span class="work-image-letter">AV</span>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>Jan 2025 to Mar 2025</span>
+              <span class="work-card-meta-dot"></span>
+              <span>Bogota, CO</span>
+            </div>
+            <h3 class="work-card-title">Operations &amp; Commercial Strategy Intern</h3>
+            <div class="work-card-company">Avianca Airlines</div>
+            <p class="work-card-desc">
+              Developed an automated VBA solution generating PDF account statements for airline
+              agency partners, saving roughly 5 hours of manual work per month. Designed a Power BI
+              dashboard for incentive payment monitoring and partner performance insights.
+            </p>
+          </div>
+        </article>
+
+        <!-- Alejandria -->
+        <article class="work-card">
+          <div class="work-image">
+            <span class="work-image-tag">Private Equity</span>
+            <span class="work-image-letter">AC</span>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>Aug 2024 to Dec 2024</span>
+              <span class="work-card-meta-dot"></span>
+              <span>Bogota, CO</span>
+            </div>
+            <h3 class="work-card-title">Intern Analyst, Venture &amp; Impact Investment</h3>
+            <div class="work-card-company">Alejandria Corp.</div>
+            <p class="work-card-desc">
+              Analyzed financial information for a venture capital ecosystem builder focused on
+              impact investment in Latin America. Built automated VBA methods that reduced manual
+              reporting work by approximately 4 hours per month.
+            </p>
+          </div>
+        </article>
+
+        <!-- Realtix -->
+        <article class="work-card">
+          <div class="work-image">
+            <span class="work-image-tag">Consulting</span>
+            <span class="work-image-letter">RX</span>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>Jan 2020 to Mar 2020</span>
+              <span class="work-card-meta-dot"></span>
+              <span>Bogota, CO</span>
+            </div>
+            <h3 class="work-card-title">Accounting Assistant</h3>
+            <div class="work-card-company">Realtix S.A.S</div>
+            <p class="work-card-desc">
+              Supported classification of tasks for annual review preparation and contributed to
+              drafting project proposals during an early professional role.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── Education ────────────────────────────────────────────── -->
+  <section id="education" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <div class="edu-grid">
+
+        <div class="edu-card">
+          <div class="edu-card-mark">CU</div>
+          <div class="edu-card-years">Aug 2025 to Dec 2026</div>
+          <div class="edu-card-degree">Master of Science, Business Analytics</div>
+          <div class="edu-card-institution">Columbia University</div>
+          <div class="edu-card-location">New York, NY · United States</div>
+          <p class="edu-card-courses">
+            Product Management · Business Analytics · Marketing Analytics ·
+            Data Analytics · Sports Analytics · Optimization Models
+          </p>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-card-mark">UA</div>
+          <div class="edu-card-years">Aug 2020 to Dec 2024</div>
+          <div class="edu-card-degree">Bachelor of Industrial Engineering</div>
+          <div class="edu-card-institution">Universidad de Los Andes</div>
+          <div class="edu-card-location">Bogota · Colombia</div>
+          <p class="edu-card-courses">
+            Computational Analytics · Finance · Logistics · Optimization
+          </p>
+          <a href="documents/diploma.pdf" target="_blank" class="edu-card-link">
+            View E-Diploma
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-card-mark">HM</div>
+          <div class="edu-card-years">Jan 2023 to Jun 2023</div>
+          <div class="edu-card-degree">Study Abroad, Engineering &amp; Energy</div>
+          <div class="edu-card-institution">Hochschule München</div>
+          <div class="edu-card-location">Munich · Germany</div>
+          <p class="edu-card-courses">
+            Marketing · Aerodynamics · Renewable Energies
+          </p>
+          <a href="documents/hm-grades.pdf" target="_blank" class="edu-card-link">
+            Grades Certificate
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── Capabilities ─────────────────────────────────────────── -->
+  <section id="skills" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <h2 class="section-title">Capabilities</h2>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-block">
+          <div class="skill-block-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div>
+            <div class="skill-block-num">01 / Stack</div>
+            <h3 class="skill-block-title">Technical Languages</h3>
+          </div>
+          <ul class="skill-list">
+            <li><span class="num">01</span>Python</li>
+            <li><span class="num">02</span>SQL (Postgres)</li>
+            <li><span class="num">03</span>R</li>
+            <li><span class="num">04</span>VBA / Visual Basic</li>
+            <li><span class="num">05</span>HTML &amp; CSS</li>
+          </ul>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          </div>
+          <div>
+            <div class="skill-block-num">02 / Platforms</div>
+            <h3 class="skill-block-title">Tools &amp; Software</h3>
+          </div>
+          <ul class="skill-list">
+            <li><span class="num">01</span>Excel</li>
+            <li><span class="num">02</span>Power BI</li>
+            <li><span class="num">03</span>Microsoft Access</li>
+            <li><span class="num">04</span>AWS</li>
+            <li><span class="num">05</span>PowerPoint</li>
+          </ul>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10c-2.5-3-4-6.5-4-10s1.5-7 4-10z"/></svg>
+          </div>
+          <div>
+            <div class="skill-block-num">03 / Spoken</div>
+            <h3 class="skill-block-title">Languages</h3>
+          </div>
+          <ul class="skill-list">
+            <li><span class="num">01</span>Spanish</li>
+            <li><span class="num">02</span>English</li>
+            <li><span class="num">03</span>German</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── Research ─────────────────────────────────────────────── -->
+  <section id="research" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <h2 class="section-title">Research</h2>
+      </div>
+
+      <div class="research-grid">
+
+        <div>
+          <p class="research-quote">
+            Designed a Monte Carlo–based methodology that combined irradiance and temperature
+            time series with household energy demand and regulatory incentives, simulating cash
+            flows, NPV, and IRR <strong>under uncertainty</strong> across roof sizes and tariff paths.
+          </p>
+
+          <div class="research-attribution">
+            Bachelor Thesis · Universidad de Los Andes · 2024
+          </div>
+
+          <a href="documents/thesis.pdf" target="_blank" class="research-cta">
+            Read the full thesis
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+        <div class="research-facts">
+          <div class="research-fact">
+            <div class="research-fact-label">Field</div>
+            <div class="research-fact-value">Renewable Energy &amp; Finance</div>
+          </div>
+          <div class="research-fact">
+            <div class="research-fact-label">Method</div>
+            <div class="research-fact-value">Monte Carlo Simulation</div>
+          </div>
+          <div class="research-fact">
+            <div class="research-fact-label">Tools</div>
+            <div class="research-fact-value">Python &amp; Time-Series Modeling</div>
+          </div>
+          <div class="research-fact">
+            <div class="research-fact-label">Outputs</div>
+            <div class="research-fact-value">NPV · IRR · Payback Period</div>
+          </div>
+          <div class="research-fact">
+            <div class="research-fact-label">Year</div>
+            <div class="research-fact-value">2024</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── Contact ──────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="wrap">
+
+      <div class="contact-row">
+        <a href="mailto:na3205@columbia.edu" class="contact-cta">
+          na3205@columbia.edu
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/nico-alvarezortiz/" target="_blank" class="contact-secondary">
+          Or find me on LinkedIn
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── Footer ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="wrap">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="footer-brand-mark">
+            <div class="mark-square">NA</div>
+            <div class="mark-text">Nicolas <span>Alvarez</span></div>
+          </div>
+          <p class="footer-brand-tag">
+            Industrial Engineer and Columbia University MSc Business Analytics. Based in New York.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Capabilities</a></li>
+            <li><a href="#research">Research</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Resources</div>
+          <ul>
+            <li><a href="resume/resume.pdf" download>Résumé</a></li>
+            <li><a href="documents/thesis.pdf" target="_blank">Bachelor Thesis</a></li>
+            <li><a href="documents/diploma.pdf" target="_blank">E-Diploma</a></li>
+            <li><a href="documents/hm-grades.pdf" target="_blank">HM Certificate</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <ul>
+            <li><a href="mailto:na3205@columbia.edu">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/nico-alvarezortiz/" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© Nicolas Alvarez · 2026</div>
+        <div class="footer-legal">
+          <a href="#hero">Back to top</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ─── JavaScript ───────────────────────────────────────────── -->
+  <script>
+
+    // ── Mobile nav toggle ────────────────────────────────────────
+    const toggle  = document.getElementById('nav-toggle');
+    const navList = document.getElementById('nav-list');
+
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navList.classList.toggle('open');
+    });
+
+    navList.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        navList.classList.remove('open');
+      });
+    });
+
+
+    // ── Shadow under nav once user scrolls past hero ─────────────
+    const mainnav = document.getElementById('mainnav');
+    window.addEventListener('scroll', () => {
+      mainnav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+
+    // ── Active nav link on scroll ────────────────────────────────
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    function updateActive() {
+      const y = window.scrollY + 200;
+      sections.forEach(sec => {
+        const top    = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (y >= top && y < top + height) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + sec.id);
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', updateActive, { passive: true });
+
+
+    // ── Reveal on scroll ─────────────────────────────────────────
+    const reveals = document.querySelectorAll(
+      '.work-card, .edu-card, .skill-block, .research-grid > div, .about-grid > *, .section-head'
+    );
+    reveals.forEach(el => el.classList.add('reveal'));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+    reveals.forEach(el => observer.observe(el));
+
+
+    // ── Stagger delays on grids for cascading reveals ────────────
+    document.querySelectorAll('.work-card').forEach((c, i) => c.style.transitionDelay = (i * 0.08) + 's');
+    document.querySelectorAll('.edu-card').forEach((c, i) => c.style.transitionDelay = (i * 0.1) + 's');
+    document.querySelectorAll('.skill-block').forEach((c, i) => c.style.transitionDelay = (i * 0.1) + 's');
+
+  </script>
+
+</body>
+</html>
