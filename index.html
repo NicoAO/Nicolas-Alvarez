@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicolas Alvarez  Industrial Engineer & Business Analytics</title>
+  <title>Nicolas Alvarez — Industrial Engineer & Business Analytics</title>
   <meta name="description" content="Industrial Engineer and Columbia University MSc Business Analytics. Experience across consulting, aviation, and marketing in the US." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -750,10 +750,12 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 12px;
+      overflow: hidden;
     }
     .edu-card-mark img {
-      max-width: 70%; max-height: 70%;
-      filter: brightness(0) invert(1);
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: none;
     }
 
     .edu-card-years {
@@ -1229,7 +1231,7 @@
           Explore my work
           <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </a>
-        <a href="resume/resume.pdf" download class="btn-ghost">
+        <a href="resume.pdf" download class="btn-ghost">
           Download résumé
           <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </a>
@@ -1247,11 +1249,9 @@
     <div class="wrap">
       <div class="about-grid">
 
-        <!-- REPLACE src with your headshot at assets/photos/profile.jpg -->
         <div class="about-photo">
-          <img src="assets/photos/profile.jpg"
-               alt="Nicolas Alvarez"
-               onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\'about-photo-placeholder\'><svg width=\'72\' height=\'72\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M4 20c0-4 3.6-7 8-7s8 3 8 7\'/></svg><span>assets/photos/profile.jpg</span></div><div class=\'about-photo-caption\'><span>Nicolas Alvarez</span><span>New York</span></div>'" />
+          <img src="profile.jpeg"
+               alt="Nicolas Alvarez" />
           <div class="about-photo-caption">
             <span>Nicolas Alvarez</span>
             <span>New York</span>
@@ -1300,7 +1300,7 @@
         <article class="work-card">
           <div class="work-image">
             <span class="work-image-tag">New Business Development</span>
-            <span class="work-image-letter">JF</span>
+            <img class="work-image-photo" src="jetfuel.jpg" alt="JetFuel Studio" />
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
@@ -1322,7 +1322,7 @@
         <article class="work-card">
           <div class="work-image">
             <span class="work-image-tag">Graduate Teaching Assistant</span>
-            <span class="work-image-letter">CU</span>
+            <img class="work-image-photo" src="columbia.jpg" alt="Columbia University" />
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
@@ -1344,7 +1344,7 @@
         <article class="work-card">
           <div class="work-image">
             <span class="work-image-tag">Aviation</span>
-            <span class="work-image-letter">AV</span>
+            <img class="work-image-photo" src="avianca.jpg" alt="Avianca Airlines" />
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
@@ -1366,7 +1366,7 @@
         <article class="work-card">
           <div class="work-image">
             <span class="work-image-tag">Private Equity</span>
-            <span class="work-image-letter">AC</span>
+            <img class="work-image-photo" src="alejandria.jpg" alt="Alejandria Corp." />
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
@@ -1388,7 +1388,7 @@
         <article class="work-card">
           <div class="work-image">
             <span class="work-image-tag">Consulting</span>
-            <span class="work-image-letter">RX</span>
+            <img class="work-image-photo" src="realtix.jpg" alt="Realtix S.A.S" />
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
@@ -1421,7 +1421,7 @@
       <div class="edu-grid">
 
         <div class="edu-card">
-          <div class="edu-card-mark">CU</div>
+          <div class="edu-card-mark"><img src="columbia.jpg" alt="Columbia University" /></div>
           <div class="edu-card-years">Aug 2025 to Dec 2026</div>
           <div class="edu-card-degree">Master of Science, Business Analytics</div>
           <div class="edu-card-institution">Columbia University</div>
@@ -1433,7 +1433,7 @@
         </div>
 
         <div class="edu-card">
-          <div class="edu-card-mark">UA</div>
+          <div class="edu-card-mark"><img src="uniandes.jpg" alt="Universidad de Los Andes" /></div>
           <div class="edu-card-years">Aug 2020 to Dec 2024</div>
           <div class="edu-card-degree">Bachelor of Industrial Engineering</div>
           <div class="edu-card-institution">Universidad de Los Andes</div>
@@ -1441,14 +1441,14 @@
           <p class="edu-card-courses">
             Computational Analytics · Finance · Logistics · Optimization
           </p>
-          <a href="documents/diploma.pdf" target="_blank" class="edu-card-link">
+          <a href="diploma.pdf" target="_blank" class="edu-card-link">
             View E-Diploma
             <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
         </div>
 
         <div class="edu-card">
-          <div class="edu-card-mark">HM</div>
+          <div class="edu-card-mark"><img src="hm.png" alt="Hochschule München" /></div>
           <div class="edu-card-years">Jan 2023 to Jun 2023</div>
           <div class="edu-card-degree">Study Abroad, Engineering &amp; Energy</div>
           <div class="edu-card-institution">Hochschule München</div>
@@ -1456,7 +1456,7 @@
           <p class="edu-card-courses">
             Marketing · Aerodynamics · Renewable Energies
           </p>
-          <a href="documents/hm-grades.pdf" target="_blank" class="edu-card-link">
+          <a href="hm-grades.pdf" target="_blank" class="edu-card-link">
             Grades Certificate
             <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
@@ -1551,11 +1551,6 @@
           <div class="research-attribution">
             Bachelor Thesis · Universidad de Los Andes · 2024
           </div>
-
-          <a href="documents/thesis.pdf" target="_blank" class="research-cta">
-            Read the full thesis
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </a>
         </div>
 
         <div class="research-facts">
@@ -1635,10 +1630,9 @@
         <div class="footer-col">
           <div class="footer-col-title">Resources</div>
           <ul>
-            <li><a href="resume/resume.pdf" download>Résumé</a></li>
-            <li><a href="documents/thesis.pdf" target="_blank">Bachelor Thesis</a></li>
-            <li><a href="documents/diploma.pdf" target="_blank">E-Diploma</a></li>
-            <li><a href="documents/hm-grades.pdf" target="_blank">HM Certificate</a></li>
+            <li><a href="resume.pdf" download>Résumé</a></li>
+            <li><a href="diploma.pdf" target="_blank">E-Diploma</a></li>
+            <li><a href="hm-grades.pdf" target="_blank">HM Certificate</a></li>
           </ul>
         </div>
 
