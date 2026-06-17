@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicolas Alvarez — Industrial Engineer & Business Analytics</title>
+  <title>Nicolas Alvarez</title>
   <meta name="description" content="Industrial Engineer and Columbia University MSc Business Analytics. Experience across consulting, aviation, and marketing in the US." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -715,6 +715,34 @@
     }
 
 
+    /* ─── Projects ───────────────────────────────────────────── */
+    #projects { background: var(--white); }
+
+    /* World Cup trophy card — gold trophy on a deep navy field */
+    .project-trophy {
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(212,175,55,0.28) 0%, transparent 62%),
+        linear-gradient(135deg, #0A1F3E 0%, #1B3560 100%);
+    }
+    .project-trophy .trophy-svg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 84px; height: 84px;
+      z-index: 2;
+      color: #E6C260;
+      filter: drop-shadow(0 6px 18px rgba(212,175,55,0.35));
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .work-card:hover .project-trophy .trophy-svg {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    /* Make the whole project card behave like a tappable link */
+    a.work-card { color: inherit; }
+    a.work-card:hover .work-card-title { color: var(--columbia); }
+
+
     /* ─── Education ──────────────────────────────────────────── */
     #education { background: var(--grey-bg); }
 
@@ -1183,6 +1211,7 @@
       <ul class="nav-list" id="nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#work">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#skills">Capabilities</a></li>
         <li><a href="#research">Research</a></li>
@@ -1410,6 +1439,44 @@
   </section>
 
 
+  <!-- ─── Projects ─────────────────────────────────────────────── -->
+  <section id="projects" class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="work-grid">
+
+        <!-- World Cup 2026 -->
+        <a href="https://worldcup2026.nicolasalvarez.org/" target="_blank" rel="noopener" class="work-card">
+          <div class="work-image project-trophy">
+            <span class="work-image-tag">Live Project</span>
+            <svg class="trophy-svg" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z" />
+              <path d="M7 6H4a2 2 0 0 0 0 4h3.2M17 6h3a2 2 0 0 1 0 4h-3.2" />
+            </svg>
+          </div>
+          <div class="work-card-body">
+            <div class="work-card-meta">
+              <span>2026</span>
+              <span class="work-card-meta-dot"></span>
+              <span>Web App</span>
+            </div>
+            <h3 class="work-card-title">World Cup 2026</h3>
+            <div class="work-card-company">worldcup2026.nicolasalvarez.org</div>
+            <p class="work-card-desc">
+              A companion site for the 2026 World Cup.
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- ─── Education ────────────────────────────────────────────── -->
   <section id="education" class="section">
     <div class="wrap">
@@ -1441,10 +1508,6 @@
           <p class="edu-card-courses">
             Computational Analytics · Finance · Logistics · Optimization
           </p>
-          <a href="diploma.pdf" target="_blank" class="edu-card-link">
-            View E-Diploma
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
-          </a>
         </div>
 
         <div class="edu-card">
@@ -1621,6 +1684,7 @@
           <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#work">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#skills">Capabilities</a></li>
             <li><a href="#research">Research</a></li>
@@ -1631,7 +1695,6 @@
           <div class="footer-col-title">Resources</div>
           <ul>
             <li><a href="resume.pdf" download>Résumé</a></li>
-            <li><a href="diploma.pdf" target="_blank">E-Diploma</a></li>
             <li><a href="hm-grades.pdf" target="_blank">HM Certificate</a></li>
           </ul>
         </div>
